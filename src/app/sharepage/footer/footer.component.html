@@ -1,0 +1,24 @@
+<div class="container-fluid footer mt-5 text-danger">
+    <div class="row">
+        <!-- name  -->
+        <div class="col-lg-4 mt-3 mb-3">
+            <h1> <span class="lobsterFont">Cloudkitchenweb</span> <a class="text-danger" routerLink="/login">[<abbr title="restricated area" class="initialism">Author Login</abbr>]</a> </h1>
+            <p>GOOD FOOD, GOOD EAT</p>
+        </div>
+        <!-- nav  -->
+        <div class="col-lg-4 mt-lg-3 mb-3 text-center">
+            <a routerLink="/"  routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">Home</a>
+            <a routerLink="/menu" routerLinkActive="active-link">Menu</a>
+            <a routerLink="/about" routerLinkActive="active-link">About</a>
+            <a routerLink="/contact" routerLinkActive="active-link">Contact</a>
+        </div>
+        <!-- socialmedia -->
+        <div class="col-lg-4 mt-3 mb-3 text-center">
+            <a href="#" target="_blank"><i class="bi bi-facebook text-primary"></i></a>
+            <a href="#" target="_blank"><i class="bi bi-envelope text-warning"></i></a>
+            <a href="#" target="_blank"><i class="bi bi-youtube text-danger"></i></a>
+            <a href="#" target="_blank"><i class="bi bi-whatsapp text-success"></i></a>
+        </div>
+        <h6 class="text-center text-light leading"> <strong> <abbr title="" class="initialism">   Copyright &#169;{{today | date:"Y"}} All rights & reserved </abbr></strong>  </h6>
+    </div>
+</div>

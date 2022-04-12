@@ -1,0 +1,67 @@
+<app-navbar></app-navbar>
+<div class="body m-2 d-flex justify-content-center align-items-center p-4">
+    <div class="CartContainer p-4 w-100" *ngIf="foodCartItems.length > 0  else noCartItems">
+           <div class="Header">
+               <h3 class="Heading">Shopping Cart</h3>
+               <h5 class="Action" (click)="this.front.clearFoodItems()">Remove all</h5>
+           </div>
+           <div *ngFor="let item of foodCartItems; let i = index">
+            <h5 class="text-secondary mt-4 mb-2 ">Product {{i+1}} <button class="btn-sm btn-danger" (click)="front.removeOneFood(item.food_id)">X</button></h5>
+            <div class="d-md-flex justify-content-between items-center Cart-Items border p-4 h-auto m-1">
+                    <div class="image-box my-2">
+                        <img src="{{item.picture}}" height="120px" />
+                    </div>
+                    <hr>
+                    <div class="about">
+                        <h3 class="title"> {{item.name}} </h3>
+                        <span class="subtitle">{{item.short_description}} </span>
+                    </div>
+                    <hr>
+                    <!-- <div class="d-flex align-items-center">
+                        <form #quantityForm="ngForm">
+                            <label  class="text-secondary">Quanity : </label>
+                            <input type="number" #count = "ngModel"  min="10" max="100" (keyup)="countItem(quantityForm)" name="count" class="form-control text-center d-flex justify-content-center items-center"  class="w-50" ngModel>
+                         </form>
+                    </div> -->
+                    <hr>
+                    <div class="prices">
+                            <div class="amount"> {{item.price | currency:"INR"}} </div>
+                    </div>
+            </div>
+           </div>
+           <hr class="line">
+           <div class="checkout">
+            <div class="total">
+                <div>
+                    <div class="Subtotal">Total Prices: </div>
+                    <div class="items"> <strong> Total Items : {{foodCartItems.length}}</strong></div>
+                </div>
+                <div class="total-amount"> {{subTotal | currency:"INR"}}</div>
+            </div>
+            <button class="button" (click)="openUserForm()">Buy Now</button>
+        </div>
+    </div>
+    <ng-template #noCartItems>
+        <div class="container-fluid mt-100">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5> Food Shopping Cart</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-sm-12 text-center"> <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                                <h3><strong>Your Cart is Empty</strong></h3>
+                                <h4>Add something to make me happy :)</h4>
+                                <button routerLink="/menu" class="btn-xl btn-primary px-2 py-1"> Continue Buy Food  </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>
+<app-footer></app-footer>
+  <!-- @Input()userOrderForm!:boolean; -->
+<app-model *ngIf="showForm" [userOrderForm]="showForm" (cancel)="closeUserOrderForm()"></app-model>

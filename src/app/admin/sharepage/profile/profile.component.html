@@ -1,0 +1,53 @@
+<section class="profile -my-2">
+    <div class="wrapper">
+        <form  [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+            <div id="wizard">
+                <section>
+                    <div class="form-header">
+                        <div class="avartar">
+                            <a href="#">
+                                <img  *ngIf="!picture else selectedImage " src="https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg"  class="w-75 h-75 rounded img-thumbnail" alt="profile">
+                                <ng-template #selectedImage>
+                                    <img  src="{{picturalUrl}}"  class="w-75 h-75 img-thumbnail rounded" alt="profile">
+                                </ng-template>
+                            </a>
+                            <div class="avartar-picker">
+                                <input type="file" name="file-1[]" id="file-1" (change)="imageProcessing($event)" class="inputfile" formControlName="profile"/>
+                                <label for="file-1">
+                                    <i class="bi bi-camera-fill"></i>
+                                    <span>Choose Picture</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-holder active">
+                                <input type="text" placeholder="Member Id" class="form-control" formControlName="id" required readonly>
+                            </div>
+                            <div class="form-holder">
+                                <input type="text" placeholder="Role" class="form-control" formControlName="role" required readonly>
+                            </div>
+                            <div class="form-holder">
+                                <input type="text" placeholder="Full Name" class="form-control" formControlName="name" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-holder">
+                        <input type="email" placeholder="Email" class="form-control" formControlName="email" required>
+                    </div>
+                    <div class="form-holder">
+                        <input type="password" placeholder="Password" class="form-control" formControlName="oldpassword" required>
+                    </div>
+                    <div class="form-holder">
+                        <input type="password" placeholder="New Password" class="form-control" formControlName="npassword">
+                    </div>
+                    <div class="form-holder">
+                        <input type="password" placeholder="Re-enter new Password" class="form-control" formControlName="cpassword">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" [disabled]="profileForm.invalid" class="btn btn-outline-primary">Update Details</button>
+                    </div>
+                </section>
+            </div>
+        </form>
+    </div>
+</section>

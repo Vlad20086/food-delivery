@@ -25,22 +25,46 @@
         $item = new Admin($db);
         $admin_id = preg_replace('/\D/', '', $_POST['admin_id']);
         $item->id = (int)$admin_id;
+        $item->email==$_POST['email'];
         $item->getSingleAdminById();
-        if(isset($_FILES['profile']['name'])){
-        }
         $item->name = $_POST['name'];
+        $item->email = $_POST['email'];
         if($item->password == $_POST['oldpassword']){
-            if(isset($_POST['npassword'])){
-                $item->password = $_POST['npassword'];
+            // profile update
+                $pictureMsg = false;
+            if ($_POST['sentPicture']=="true") {
+                $upload_path = __DIR__."/images/admin/".basename($_FILES["picture"]['name']);
+                $valid_ext = array('png','jpeg','jpg','gif');
+                $ext = strtolower(pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION));
+                if(in_array($ext,$valid_ext)){  
+                    if(file_exists($upload_path)){
+                        $filename = basename($_FILES['picture']['name'],".".$ext).rand().".".$ext;
+                        $upload_path = __DIR__."/images/admin/".$filename;
+                        $url = "https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/images/admin/".$filename;
+                        // echo json_encode(array("Error"=>"path exits"));   
+                    }else {
+                        $url = "https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/images/admin/".basename($_FILES["picture"]['name']);
+                        // echo json_encode(array("Error"=>"path does not exits"));   
+                    }
+                    if($_FILES['picture']['size']/1024 > 100 ){
+                        $database->compressedImage($_FILES['picture']['tmp_name'],$upload_path,40);   
+                    }else if($_FILES['picture']['size']/1024 < 100 ) {
+                        $database->compressedImage($_FILES['picture']['tmp_name'],$upload_path,60);   
+                    }
+                        $pictureMsg = true;
+                        $item->profile = $url;
+                }else {
+                    echo json_encode(array("message"=>"File formate is not correct ", "status"=>0));
+                }
             }
-            $item->email==$_POST['email'];
+            //profile update end
             if($item->updateAdmin()){
-                echo json_encode(array("message"=>"Admin Data update", "status"=>1, "data"=>$_POST['name']. " ".$item->name ));
+                echo json_encode(array("message"=>"Admin Data update", "status"=>1));
             } else{
                 echo json_encode(array("message"=>"Admin Data could not update", "status"=>0));
             }
         }else {
-            echo json_encode(array("message"=>"Old Password was incorrect", "status"=>2, "data"=>$item->getSingleAdminById()));
+            echo json_encode(array("message"=>"Old Password was incorrect", "status"=>2));
         }
     }else if(isset($_GET['food'])){
         $item = new Food($db);
@@ -50,24 +74,26 @@
         $item->price = $_POST['price'];
         $item->picture = "";
         $pictureMsg = false;
-        if (isset($_FILES['picuture']['name'])) {
-            $upload_path = __DIR__."/images/".basename($_FILES["picture"]['name']);
+        if ($_POST['sentPicture']=="true") {
+            $upload_path = __DIR__."/images/food_image/".basename($_FILES["picture"]['name']);
             $valid_ext = array('png','jpeg','jpg','gif');
             $ext = strtolower(pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION));
             if(in_array($ext,$valid_ext)){  
                 if(file_exists($upload_path)){
                     $filename = basename($_FILES['picture']['name'],".".$ext).rand().".".$ext;
-                    $upload_path = __DIR__."/images/".$filename;
-                    $url = "https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/images/".$filename;
+                    $upload_path = __DIR__."/images/food_image/".$filename;
+                    $url = "https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/images/food_image/".$filename;
+                    // echo json_encode(array("Error"=>"path exits"));   
                 }else {
-                    $url = "https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/images/".basename($_FILES["thumbnail"]['name']);
+                    $url = "https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/images/food_image/".basename($_FILES["picture"]['name']);
+                    // echo json_encode(array("Error"=>"path does not exits"));   
                 }
                 if($_FILES['picture']['size']/1024 > 100 ){
                     $database->compressedImage($_FILES['picture']['tmp_name'],$upload_path,40);   
                 }else if($_FILES['picture']['size']/1024 < 100 ) {
                     $database->compressedImage($_FILES['picture']['tmp_name'],$upload_path,60);   
                 }
-                $pictureMsg = true;
+                    $pictureMsg = true;
                     $item->picture = $url;
             }else {
                 echo json_encode(array("message"=>"File formate is not correct ", "status"=>0));
@@ -75,6 +101,7 @@
         }else {
             if($data = $item->getSingleFood($_GET['food_id'])){
                 $item->picture = $data['picture'];
+                // echo json_encode(array("Error"=>"Old path fetched", "file"=>$_FILES['picuture']['name']));   
             }else {
                 echo json_encode(array("Error"=>"Old path could not fetched"));   
             }

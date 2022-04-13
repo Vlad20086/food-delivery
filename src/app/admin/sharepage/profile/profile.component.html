@@ -6,7 +6,7 @@
                     <div class="form-header">
                         <div class="avartar">
                             <a href="#">
-                                <img  *ngIf="!picture else selectedImage " src="https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg"  class="w-75 h-75 rounded img-thumbnail" alt="profile">
+                                <img  *ngIf="!picture else selectedImage " src="{{profileImage}}"  class="w-75 h-75 rounded img-thumbnail" alt="profile">
                                 <ng-template #selectedImage>
                                     <img  src="{{picturalUrl}}"  class="w-75 h-75 img-thumbnail rounded" alt="profile">
                                 </ng-template>
@@ -37,12 +37,12 @@
                     <div class="form-holder">
                         <input type="password" placeholder="Password" class="form-control" formControlName="oldpassword" required>
                     </div>
-                    <div class="form-holder">
+                    <!-- <div class="form-holder">
                         <input type="password" placeholder="New Password" class="form-control" formControlName="npassword">
                     </div>
                     <div class="form-holder">
                         <input type="password" placeholder="Re-enter new Password" class="form-control" formControlName="cpassword">
-                    </div>
+                    </div> -->
                     <div class="text-center">
                         <button type="submit" [disabled]="profileForm.invalid" class="btn btn-outline-primary">Update Details</button>
                     </div>

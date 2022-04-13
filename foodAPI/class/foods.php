@@ -48,17 +48,17 @@
                     $stmt = $this->conn->prepare($sqlQuery);
         
              // sanitize
-            echo $this->admin_id = htmlspecialchars(strip_tags($this->admin_id));
-            echo $this->name = htmlspecialchars(strip_tags($this->name));
-            echo $this->price = htmlspecialchars(strip_tags($this->price));
-            echo $this->short_description = htmlspecialchars(strip_tags($this->short_description));
-            echo $this->picutre = htmlspecialchars(strip_tags($this->picture));
+             (int)$this->admin_id = htmlspecialchars(strip_tags($this->admin_id));
+             $this->name = htmlspecialchars(strip_tags($this->name));
+             $this->price = htmlspecialchars(strip_tags($this->price));
+             $this->short_description = htmlspecialchars(strip_tags($this->short_description));
+             $this->picutre = htmlspecialchars(strip_tags($this->picture));
         
             $stmt->bindParam(":admin_id", $this->admin_id);
             $stmt->bindParam(":name", $this->name);
-            $stmt->bindParam(":languages", $this->price);
-            $stmt->bindParam(":level", $this->short_description);
-            $stmt->bindParam(":downloadlink", $this->picture);
+            $stmt->bindParam(":price", $this->price);
+            $stmt->bindParam(":short_description", $this->short_description);
+            $stmt->bindParam(":picture", $this->picture);
             if($stmt->execute()){
                return true;
             }

@@ -17,12 +17,18 @@
     $database = new Database();
     $db = $database->getConnection();
     if(isset($_GET['food']) && isset($_GET['food_id'])){
-        $item = new Food($db);
-        $item->id = htmlspecialchars($_GET['food_id']);
-        if($item->deleteFood()){
-            echo json_encode("Food data has beendeleted");
-        } else{
-            echo json_encode("Food data could not be deleted");
+        $cItem = new Customer($db);
+        $cItem->id = htmlspecialchars($_GET['food_id']);
+        if($cItem->getSingleCustomerByFood()){
+            echo json_encode(array("message"=>"This is food has been orderd by customers", "status"=>2));
+        }else {
+            $item = new Food($db);
+            $item->id = htmlspecialchars($_GET['food_id']);
+            if($item->deleteFood()){
+                echo json_encode(array("message"=>"Food has been deleted", "status"=>1));
+            } else{
+                echo json_encode(array("message"=>"Food could not delete", "status"=>0));
+            }
         }
     }else if(isset($_GET['feedback']) && $_GET['feedback_id']){
         $item = new Feedback($db);

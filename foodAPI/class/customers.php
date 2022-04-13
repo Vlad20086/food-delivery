@@ -71,6 +71,19 @@
             return $dataRow;
         }
 
+        public function getSingleCustomerByFood(){
+            $sqlQuery = "SELECT * FROM ". $this->db_table ." WHERE food_id = ?";
+            $stmt = $this->conn->prepare($sqlQuery);
+            $stmt->bindParam(1, $this->id);
+            $stmt->execute();
+            $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($dataRow){
+                return true;
+            }else {
+                return false;
+            }
+        }
+
         public function orderStatus(){
 
             $sqlQuery = "UPDATE ". $this->db_table ." 

@@ -33,14 +33,14 @@
         if (isset($_FILES['picture']['name'])) {
             $valid_ext = array('png','jpeg','jpg','gif');
             $ext = strtolower(pathinfo($_FILES['picture']['name'], PATHINFO_EXTENSION));
-            $upload_path = __DIR__."/images/food_image".$_FILES['picture']['name'];
+            $upload_path = __DIR__."/images/food_image/".$_FILES['picture']['name'];
             if(in_array($ext,$valid_ext)){  
                 if(file_exists($upload_path)){
                     $filename = basename($_FILES['picture']['name'],".".$ext).rand().".".$ext;
-                    $upload_path = __DIR__."/images/food_image".$filename;
-                    $url = "https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/images/".$filename;
+                    $upload_path = __DIR__."/images/food_image/".$filename;
+                    $url = "https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/images/food_image/".$filename;
                 }else{
-                    $url = "https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/images/".basename($_FILES["picture"]['name']);
+                    $url = "https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/images/food_image".basename($_FILES["picture"]['name']);
                 }
                 if(move_uploaded_file($_FILES['picture']['tmp_name'], $upload_path)){
                     // echo json_encode(array("message"=>"file is moved: ".$upload_path));

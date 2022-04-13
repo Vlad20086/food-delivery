@@ -10,11 +10,13 @@ import { ApiService } from 'src/app/services/api.service';
 export class ProfileComponent implements OnInit {
 
   picture:boolean = false;
-  pictureFile:any;
-  picturalUrl:any; 
-
+  pictureFile:any ="";
+  picturalUrl:any;
+  sentPicutre:string = "false";
+  profileImage:any
   adminId!:number;
   sameEmail:string = "false";
+  teamEmail:string = "";
   constructor(private api:ApiService) { }
 
   getTeam(){
@@ -22,6 +24,8 @@ export class ProfileComponent implements OnInit {
       next:data=>{
         let member = data.body;
         this.adminId  = member.admin_id;
+        this.profileImage = member.profile;
+        this.teamEmail= member.email;
         this.profileForm.patchValue({"name":member.name, "email":member.email, "id":`Member Id : ${member.admin_id}`, "role":`Role : Member`})
       },
       error: error=>{
@@ -35,6 +39,7 @@ export class ProfileComponent implements OnInit {
     if(event.target.files.length > 0 ){
       this.picture = true;
       const reader = new FileReader();
+      this.sentPicutre = "true";
       reader.onload = () => {
         this.picturalUrl= reader.result as string;
       }
@@ -82,24 +87,28 @@ export class ProfileComponent implements OnInit {
       formData.append("email", this.profileForm.value.email);
       formData.append("npassword", this.profileForm.value.npassword);
       formData.append("oldpassword", this.profileForm.value.oldpassword);
-      formData.append("profile", this.pictureFile);
+      formData.append("picture", this.pictureFile);
       formData.append("admin_id", adminId);
       formData.append("sameEmail", this.sameEmail);
+      formData.append("sentPicture", this.sentPicutre);
       this.api.updateProfile(formData).subscribe({
         next:data=>{
+          console.warn(this.pictureFile);
           console.warn(data);
-          // this.profileForm.reset();
-          // this.message = "Profile has been updated";
-          alert("Profile Updated");
-          setTimeout(()=>{
-            this.message = "";
-          },4000)
+          if(data.status ==2){
+            alert("Password is wrong");
+          }else if(data.status==1){
+            this.getTeam();
+            localStorage.setItem("sessionEmail",this.profileForm.value.email);
+            alert("Profile Updated");
+          }else if(data.status==0){
+            alert("server side occured");
+          }else {
+            alert("server side occured");
+          }
         },
         error:error=>{
           this.message = error.message;
-          setTimeout(()=>{
-            this.message = "";
-          },4000)
         }
       })
     }else {
@@ -109,6 +118,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTeam();
+    // localStorage.removeItem("sessionEmail");
+    // localStorage.setItem("sessionEmail","sajid11@gmail.com");
+    // localStorage.removeItem("isLogged");
   }
 
 }

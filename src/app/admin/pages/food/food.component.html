@@ -44,7 +44,7 @@
                       <button class="btn btn-danger" (click)="deleteFood(data.food_id)" ><i class="bx bx-trash"></i></button>
                   </th>
                   <th scope="row">{{data.food_id}}</th>
-                  <td><img src="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq" width="100" height="100" alt="image" class=""></td>
+                  <td><img src="{{data.picture}}" width="100" height="100" alt="image" class=""></td>
                   <td>{{data.name}}</td>
                   <td>{{data.price}}</td>
                   <td>{{data.short_description}}</td>
@@ -90,7 +90,7 @@
                     <span class="invaild-feedback text-danger" *ngIf="picture">Please select picutre of food</span>   
                   </ng-template>
                 </div>
-                <button type="submit" [disabled]="!addFoodForm.valid" class="btn btn-primary px-2 py-1">Add Food</button>
+                <button type="submit" [disabled]="!addFoodForm.valid" class="btn btn-primary px-2 py-1">{{addFoodBtn}}</button>
               </form>
             </div>
           <!-- End Food add form  -->
@@ -126,7 +126,7 @@
                     <span class="invaild-feedback text-danger" *ngIf="picture">Please select picutre of food</span>   
                   </ng-template>
                 </div>
-                <button type="submit" [disabled]="addFoodForm.invalid" class="btn btn-success px-2 py-1">Update Data</button>
+                <button type="submit" [disabled]="addFoodForm.invalid" class="btn btn-success px-2 py-1">{{updateFoodBtn}}</button>
               </form>
             </div>
           <!-- End Edit  Food form  -->

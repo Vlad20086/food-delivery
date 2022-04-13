@@ -16,6 +16,10 @@ export class FoodComponent implements OnInit {
   foodTable:boolean = true;
   addForm:boolean = false;
   showEditForm = false;
+  addFoodBtn:string = "Add Food";
+  updateFoodBtn:string  = "Update";
+
+  sentPicture:string = "false";
 
   editFormId!:any; 
 
@@ -34,6 +38,7 @@ export class FoodComponent implements OnInit {
       this.showPicture = true;
       this.picture = false;
       const reader = new FileReader();
+      this.sentPicture = "true";
       reader.onload = () => {
         this.picutreUrl= reader.result as string;
       }
@@ -63,6 +68,7 @@ export class FoodComponent implements OnInit {
   formData:any = new FormData();
   message:string = "";
   addFood(){
+    this.addFoodBtn = "Please Wait";
     if(this.picutreUrl !=="") {
       this.formData.append("name", this.addFoodForm.value.name);
       this.formData.append("adminId", "0");
@@ -71,6 +77,7 @@ export class FoodComponent implements OnInit {
       this.formData.append("picture", this.pictureFile);
       this.api.addFood(this.formData).subscribe({
         next:data=>{
+          this.addFoodBtn = "Add Food";
           this.getFood();
           this.backToTable();
           setTimeout(()=>{
@@ -82,6 +89,7 @@ export class FoodComponent implements OnInit {
           },4000);
         },
         error:errorMessage=>{
+          this.addFoodBtn = "Add Food";
           this.backToTable();
           setTimeout(()=>{
             window.scroll({ top: 0, left: 0, behavior: 'smooth'});
@@ -102,6 +110,7 @@ export class FoodComponent implements OnInit {
   getFood(){
     this.api.getFood().subscribe({
       next:data=>{
+        console.warn(data.body);
         this.foodData = data.body;
         this.itemCount = data.itemCount;
       },
@@ -115,9 +124,19 @@ export class FoodComponent implements OnInit {
     let food_id = id;
     this.api.deleteFood(food_id).subscribe({
       next:data=>{
-        this.getFood();
-        window.scroll({ top: 0, left: 0, behavior: 'smooth'});
-        this.message = "One Food Has been deleted";
+        if(data.status==1){
+          window.scroll({ top: 0, left: 0, behavior: 'smooth'});
+          this.message = "One Food Has been deleted";
+        }else if(data.status==2){
+          window.scroll({ top: 0, left: 0, behavior: 'smooth'});
+          this.message = "Please delete order of customer related this food";
+        }else if(data.status ==0){
+          window.scroll({ top: 0, left: 0, behavior: 'smooth'});
+          this.message = "Server Side error ocurred";
+        }else {
+          window.scroll({ top: 0, left: 0, behavior: 'smooth'});
+          this.message = "Server Side error ocurred";
+        }
         setTimeout(()=>{
           this.message = "";
         },4000);
@@ -130,15 +149,19 @@ export class FoodComponent implements OnInit {
   updateFormData = new FormData();
   updateMsg:string ="";
   updateFood(){
+    this.updateFoodBtn = "Please wait";
     this.updateFormData.append("name", this.addFoodForm.value.name);
     this.updateFormData.append("adminId", "0");
     this.updateFormData.append("price", this.addFoodForm.value.price);
     this.updateFormData.append("description", this.addFoodForm.value.description);
     this.updateFormData.append("picture", this.pictureFile);
-    // this.updateFormData.append("food_id", this.editFormId );
+    this.updateFormData.append("food_id", this.editFormId );
+    this.updateFormData.append("sentPicture", this.sentPicture );
+    console.warn(this.pictureFile);
     this.api.updateFood(this.editFormId, this.updateFormData).subscribe({
       next:data=>{
         this.updateMsg = "";
+        this.updateFoodBtn = "Update";
         this.getFood();
         this.backToTable();
         setTimeout(()=>{
@@ -151,6 +174,7 @@ export class FoodComponent implements OnInit {
        }
       },
       error: error=>{
+        this.updateFoodBtn = "Update";
         this.message = "Error: "+ error.message ;
         console.warn(error.message);
       }

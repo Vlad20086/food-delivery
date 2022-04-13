@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 12, 2022 at 10:31 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+-- Host: localhost:3306
+-- Generation Time: Apr 13, 2022 at 05:40 PM
+-- Server version: 10.5.12-MariaDB
+-- PHP Version: 7.3.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `food-delivery`
+-- Database: `id18676455_fooddelivery`
 --
 
 -- --------------------------------------------------------
@@ -41,9 +42,10 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`admin_id`, `name`, `email`, `password`, `profile`, `timestamp`) VALUES
-(45, 'Sajid Ali', 'sajid@gmail.com', '123', 'https://image.shutterstock.com/image-vector/profile-picture-vector-260nw-404138239.jpg&amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;#039;	', '2022-04-11 18:00:54'),
+(45, 'Ashwani Kumar', 'sajid1@gmail.com', '123', 'https://failureboy123.000webhostapp.com/foodAPI/api/images/admin/download1271104356.jpeg', '2022-04-11 18:00:54'),
 (61, 'admin@gmail.com', 'admin@gmail.com', '123', '\'https://image.shutterstock.com/image-vector/profile-picture-vector-260nw-404138239.jpg\'	', '2022-04-11 18:44:28'),
-(62, 'admin1@gmail.com', 'admin1@gmail.com', '123', '\'https://image.shutterstock.com/image-vector/profile-picture-vector-260nw-404138239.jpg\'	', '2022-04-11 18:45:29');
+(62, 'admin1@gmail.com', 'admin1@gmail.com', '123', '\'https://image.shutterstock.com/image-vector/profile-picture-vector-260nw-404138239.jpg\'	', '2022-04-11 18:45:29'),
+(63, 'rahul@gmail.com', 'rahul@gmail.com', '123', 'https://image.shutterstock.com/image-vector/profile-picture-vector-260nw-404138239.jpg', '2022-04-13 17:33:05');
 
 -- --------------------------------------------------------
 
@@ -67,10 +69,7 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `food_id`, `name`, `phone_number`, `delivery_address`, `order_status`, `order_id`, `order_date`) VALUES
-(973, 30, 'karina', '7065221377', 'delhi', 0, '256741', '2022-04-11 17:41:58'),
-(974, 30, 'sajid', '7065221377', 'delhi', 0, '439550', '2022-04-11 15:38:56'),
-(981, 29, 'Ok', 'ok', 'ok', 2, '409248', '2022-04-11 17:41:49'),
-(982, 30, 'Ok', 'ok', 'ok', 2, '409248', '2022-04-11 17:41:49');
+(974, 1, 'sajid', '7065221377', 'delhi', 2, '439550', '2022-04-13 17:09:35');
 
 -- --------------------------------------------------------
 
@@ -119,26 +118,13 @@ CREATE TABLE `testy_food` (
 
 INSERT INTO `testy_food` (`food_id`, `admin_id`, `name`, `price`, `short_description`, `picture`, `timestamp`) VALUES
 (1, 1, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-02 18:51:24'),
-(2, 1, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-02 18:52:02'),
 (3, 1, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-02 18:52:02'),
 (4, 0, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-04 20:38:47'),
 (5, 1, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-02 18:52:02'),
 (6, 0, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-04 20:22:43'),
 (7, 1, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-02 18:52:02'),
 (8, 1, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-02 18:52:02'),
-(10, 1, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-02 18:52:02'),
-(11, 1, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-02 18:52:02'),
-(12, 0, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-04 20:37:30'),
-(13, 1, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-02 18:52:02'),
-(14, 1, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-02 18:52:02'),
-(15, 0, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-04 20:37:24'),
-(16, 1, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-02 18:52:02'),
-(17, 1, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-02 18:52:02'),
-(18, 1, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-02 18:52:02'),
-(20, 1, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-02 18:52:02'),
-(21, 0, ' I love food', 300, 'Pan-fried masala paneer', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-09 07:53:00'),
-(29, 1, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-02 18:52:02'),
-(30, 0, 'Paneer ', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-09 07:49:03');
+(10, 1, 'Paneer Grilled Sandwich', 200, 'Pan-fried masala paneer.', 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_1024/wzfq7djolqxgdhghebbq', '2022-04-02 18:52:02');
 
 -- --------------------------------------------------------
 
@@ -210,7 +196,7 @@ ALTER TABLE `web_contents`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -228,7 +214,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `testy_food`
 --
 ALTER TABLE `testy_food`
-  MODIFY `food_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `food_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `web_contents`

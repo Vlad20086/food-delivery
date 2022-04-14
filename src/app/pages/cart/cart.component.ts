@@ -10,7 +10,6 @@ export class CartComponent implements OnInit {
 
   constructor(public front:FrontendService) { }
   foodCartItems:any = [];
-  subTotal:number = 0;
   foodPrice:number = 0;
 
   totalItems:number = this.foodCartItems.length; 
@@ -19,20 +18,7 @@ export class CartComponent implements OnInit {
 
   foodCart(){
     this.foodCartItems = this.front.getFoodItems();
-    for(let i = 0; i < this.foodCartItems.length; i++){
-      this.subTotal += parseInt(this.foodCartItems[i].price);
-    }
   }
-  // addCounter(event:any){
-  //   this.repeatFoodCount +=1;
-  // }
-  // minusCounter(event:any){
-  //   if(this.repeatFoodCount > 1 ){
-  //     this.repeatFoodCount -=1;
-  //   }else {
-  //     this.repeatFoodCount =1;
-  //   }
-  // }
   openUserForm(){
     this.showForm = true;
   }
@@ -43,4 +29,5 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.foodCart(); 
   }
+
 }

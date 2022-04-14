@@ -44,7 +44,7 @@
                         <input type="password" placeholder="Re-enter new Password" class="form-control" formControlName="cpassword">
                     </div> -->
                     <div class="text-center">
-                        <button type="submit" [disabled]="profileForm.invalid" class="btn btn-outline-primary">Update Details</button>
+                        <button type="submit" [disabled]="profileForm.invalid && disabledBtn" class="btn btn-outline-primary">Update Details</button>
                     </div>
                 </section>
             </div>

@@ -36,7 +36,7 @@
                     <div class="Subtotal">Total Prices: </div>
                     <div class="items"> <strong> Total Items : {{foodCartItems.length}}</strong></div>
                 </div>
-                <div class="total-amount"> {{subTotal | currency:"INR"}}</div>
+                <div class="total-amount"> {{this.front.totalPrice| currency:"INR"}}</div>
             </div>
             <button class="button" (click)="openUserForm()">Buy Now</button>
         </div>

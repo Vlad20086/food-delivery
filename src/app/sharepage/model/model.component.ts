@@ -31,9 +31,9 @@ export class ModelComponent implements OnInit {
     this.addCart.emit();
   }
   orderForm = new FormGroup({
-    "name": new FormControl("", [Validators.required]),
-    "address": new FormControl("", [Validators.required]),
-    "number": new FormControl("", [Validators.required]),
+    "name": new FormControl("", [Validators.required,Validators.minLength(3),Validators.pattern('^[A-Za-z]+$')]  ),
+    "address": new FormControl("", [Validators.required, Validators.minLength(20)]),
+    "number": new FormControl("", [Validators.required, Validators.minLength(10),Validators.maxLength(10), Validators.pattern('^[0-9]*$')]),
   })
 
   get name(){

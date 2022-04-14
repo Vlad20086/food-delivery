@@ -2,12 +2,17 @@
 <div class="input-group d-flex justify-content-center mt-5" *ngIf="!orderData else trackOrder">
     <div class="form-outline d-flex mt-5">
         <form [formGroup]="searchForm">
-            <input type="search"  formControlName="orderId" class="form-control px-2 py-1" placeholder="Enter Order id" required/>
+            <input type="search" formControlName="orderId" class="form-control px-2 py-1" placeholder="Enter Order id" required/>
         </form>
-        <button type="button" class="btn btn-danger px-2 py-1 mx-1" (click)="searchOrder()">
+        <button type="button" [disabled]="!searchForm.valid"  class="btn btn-danger px-2 py-1 mx-1" (click)="searchOrder()">
             <i class="bi bi-search text-danger"></i>
         </button>
     </div>
+</div>
+<div class="text-center my-4">
+    <span class="alert alert-info py-1 px-2" *ngIf="orderid?.touched && orderid?.invalid ">Please enter valid order id number <br></span>
+    <span class="alert alert-info py-1 px-2 my-2" *ngIf="orderid?.errors?.pattern">Order id must be an number <br></span>
+    <span class="alert alert-warning py-1 px-2 my-2" *ngIf="message && message!=''"> {{message}}</span>
 </div>
 <ng-template #trackOrder>
     <div class="d-flex flex-column justify-content-center align-items-center" id="order-heading">

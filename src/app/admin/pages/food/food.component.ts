@@ -51,7 +51,7 @@ export class FoodComponent implements OnInit {
 
   addFoodForm = new FormGroup({
     "name": new FormControl("", [Validators.required]),
-    "price": new FormControl("",[Validators.required]),
+    "price": new FormControl("",[Validators.required, Validators.pattern('^[0-9]*$')]),
     "description": new FormControl("",[Validators.required]),
   });
 

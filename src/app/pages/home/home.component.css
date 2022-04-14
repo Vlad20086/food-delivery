@@ -1,9 +1,10 @@
-.banner
+.bgimg
 {
-    background-image: url('../../../assets/img/bannerimg.jpg');
+    /* background-image: url('../../../assets/img/bannerimg.jpg'); */
     height: 600px;
     background-position: center top;
     background-size: cover;
+    width:100%;
 }
 .content
 {
@@ -11,6 +12,7 @@
     left: 20%;
     position: absolute;
 }
+
 .content h1 
 {
     color: #fff;
@@ -18,18 +20,32 @@
     font-weight: bold;
   
 }
+
+@media screen and (max-width: 480px) {
+    .content
+    {
+        top: 20%;
+    }
+    
+    /* .content h1 {
+        font-size:50px;
+    } */
+
+}
+
 .content a 
 {
     text-decoration: none;
-    background-color: #fff;
-    color: var(--primary-color);
+    background-color: red;
+    color: #fff;
     padding: 15px 20px;
     border-radius: 5px;
+    font-weight:bolder;
 }
 
 .content a:hover 
 {
-    background-color: var(--primary-color);
+    background-color:#b80909;
     color: #fff;
 }
 

@@ -70,8 +70,6 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
-
-  
   adminName:string = "Reload Page";
   onSearch(){
     alert("not working yet");

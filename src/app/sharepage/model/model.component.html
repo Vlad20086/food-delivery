@@ -13,13 +13,18 @@
         <form [formGroup]="orderForm" (ngSubmit)="placeOrder()">
             <button class="alert alert-success" *ngIf="message!==''"> {{message}}</button>
             <input type="text" class="form-control my-2 w-100" placeholder="Your Name" formControlName = "name"  required/>
-            <span class="invaild-feedback text-danger" *ngIf="name && name.invalid && name.touched" >Please enter valid input</span>            
+            <span class="invaild-feedback text-danger" *ngIf="name && name.invalid && name.touched" >Please enter valid name</span> 
+            <span class="invaild-feedback text-danger" *ngIf="name && name.errors?.pattern">Name must be not in  number</span>             
 
             <input type="text" class="form-control my-2 w-100" placeholder="Mobile Number " formControlName = "number" required/>
-            <span class="invaild-feedback text-danger" *ngIf="number && number.invalid && number.touched" >Please enter valid input</span>            
+            <span class="invaild-feedback text-danger" *ngIf="number && number.touched && number.invalid">Please enter valid number <br></span>
+            <span class="invaild-feedback text-danger" *ngIf="number && number.errors?.pattern">Please enter only number</span>            
+            <span class="invaild-feedback text-danger" *ngIf="number && number.errors?.minLength">Number must be 10 digit</span>  
+            <span class="invaild-feedback text-danger" *ngIf="number && number.errors?.maxLength">Number could not be more than 10 digit</span>  
 
             <textarea class="form-control my-2 w-100" placeholder="Enter Your Address" formControlName = "address" required></textarea>
-            <span class="invaild-feedback text-danger" *ngIf="address && address.invalid && address.touched" >Please enter valid input</span>            
+            <span class="invaild-feedback text-danger" *ngIf="address && address.invalid && address.touched" >Please enter valid address <br></span>            
+            <span class="invaild-feedback text-danger" *ngIf="address && address.errors?.maxLength">Please enter addresss atleast 20 letters</span>  
             <div class="d-flex justify-content-center items-center">
                 <button type="submit" class="btn btn-dark mt-3 mx-1" [disabled]="orderForm.invalid">Place Order</button> 
                 <button class="btn btn-outline-danger mt-3 mx-1"(click)="closeModel()">Cancel</button> 

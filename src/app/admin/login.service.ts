@@ -21,7 +21,8 @@ export class LoginService {
       this.loggedIn=true;
       localStorage.setItem("isLogged", "true");
       const newLocal = "sessionEmail";
-      localStorage.setItem(newLocal, email);        
+      localStorage.setItem(newLocal, email);  
+      this.getOneTeam();      
   }
 
   isLogin(){

@@ -21,9 +21,9 @@ export class MenupageComponent implements OnInit {
   constructor(private param:ActivatedRoute, private route:Router,  private api:ApiService, private front:FrontendService) { }
   
   orderForm = new FormGroup({
-    "name": new FormControl("", [Validators.required]),
-    "address": new FormControl("", [Validators.required]),
-    "number": new FormControl("", [Validators.required]),
+    "name": new FormControl("", [Validators.required,Validators.minLength(3),Validators.pattern('^[A-Za-z]+$')]  ),
+    "address": new FormControl("", [Validators.required, Validators.minLength(20)]),
+    "number": new FormControl("", [Validators.required, Validators.minLength(10),Validators.maxLength(10), Validators.pattern('^[0-9]*$')]),
   })
 
   get name(){
@@ -39,10 +39,12 @@ export class MenupageComponent implements OnInit {
   message:string = "";
   placeOrder(id:any){
     const formData  = new FormData();
+    let order_id = Math.floor(Math.random()*999999-999+1)+999;
     formData.append("name", this.orderForm.value.name);
     formData.append("address", this.orderForm.value.address);
     formData.append("number", this.orderForm.value.number);
     formData.append("food_id",id);
+    formData.append("order_id",order_id.toString());
     this.api.addOrder(formData).subscribe({
       next:data=>{
         this.message = "Your order has been Recieved, We'll soon contact you :)"

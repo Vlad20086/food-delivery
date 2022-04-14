@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class FrontendService {
 
   foodItems:any = [];
+  totalPrice:number = 0;
   
   constructor() {}  
     addToCart(food:any){
@@ -23,19 +24,30 @@ export class FrontendService {
         this.foodItems.push(food);
     }
     getFoodItems(){
+      this.subTotal();
       return this.foodItems;
     }
     clearFoodItems(){
+      this.totalPrice  = 0;
+      this.subTotal();
       this.foodItems.splice(0,this.foodItems.length)
       return this.foodItems;
+    }
+
+    subTotal(){
+      for(let i = 0; i < this.foodItems.length; i++){
+         this.totalPrice += parseInt(this.foodItems[i].price);
+      }
     }
     removeOneFood(id:number){
       for (let item of this.foodItems) {
         if (id === item.food_id) {
             this.foodItems.splice(this.foodItems.indexOf(item), 1);
+            this.totalPrice = 0;
+            this.subTotal();
             break;
         }
+        return this.foodItems;
       }
-      return this.foodItems;
     }
 }

@@ -12,9 +12,9 @@ export class ContactComponent implements OnInit {
   constructor(private api:ApiService) { }
 
   contactForm = new FormGroup({
-    "firstname":new FormControl("", [Validators.required]),
-    "lastname":new FormControl("", [Validators.required]),
-    "number":new FormControl("", [Validators.required]),
+    "firstname":new FormControl("", [Validators.required,Validators.pattern('^[A-Za-z]+$')]),
+    "lastname":new FormControl("", [Validators.required,Validators.pattern('^[A-Za-z]+$')]),
+    "number":new FormControl("", [Validators.required,Validators.minLength(10),Validators.maxLength(10), Validators.pattern('^[0-9]*$')]),
     "email":new FormControl("", [Validators.required, Validators.email]),
     "feedback":new FormControl("", [Validators.required]),
   });
@@ -45,18 +45,15 @@ export class ContactComponent implements OnInit {
     this.api.addFeedback(formData).subscribe({
       next:data=>{
         this.contactForm.reset();
-        this.message = "Thank You for connecting us, We'll sovled  you within 24 hours :)"
-        setTimeout(()=>{
-          this.message = "";
-        },4000)
+        this.message = "Thank You for connecting us, We'll contact you within 24 hours :)";
       },
       error:error=>{
         this.message = error.message;
-        setTimeout(()=>{
-          this.message = "";
-        },4000)
       }
     })
+    setTimeout(()=>{
+      this.message = "";
+    },4000)
   }
 
   ngOnInit(): void {

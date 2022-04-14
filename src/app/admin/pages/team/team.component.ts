@@ -14,10 +14,10 @@ export class TeamComponent implements OnInit {
   constructor(private api:ApiService, public loginService:LoginService) { }
 
   addTeamForm = new FormGroup({
-    "name": new FormControl("",[Validators.required,]),
+    "name": new FormControl("",[Validators.required,Validators.minLength(3),Validators.pattern('^[A-Za-z]+$')]),
     "email": new FormControl("", [Validators.required, Validators.email]),
-    "password": new FormControl("", [Validators.required]),
-    "cpassword": new FormControl("", [Validators.required]),
+    "password": new FormControl("", [Validators.required, Validators.minLength(4)]),
+    "cpassword": new FormControl("", [Validators.required, Validators.minLength(4)]),
   });
 
     get name(){

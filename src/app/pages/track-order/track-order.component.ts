@@ -18,10 +18,13 @@ export class TrackOrderComponent implements OnInit {
 
   constructor(private api:ApiService, private currentR:ActivatedRoute, private route:Router) { }
 
-  
   searchForm = new FormGroup({
-    "orderId":new FormControl("", [Validators.required])
+    "orderId":new FormControl("", [Validators.required, Validators.pattern('^[0-9]*$')])
   })
+
+  get orderid(){
+    return this.searchForm.get("orderId");
+  }
   
   orderId!:number; 
   searchOrder(){
@@ -50,14 +53,17 @@ export class TrackOrderComponent implements OnInit {
           }
           this.searchForm.reset();
         }else{
-          // this.message = "Order id does not found or incorrect";
-          alert("Order id does not  found in our record");
+          this.message = `No food item(s) were found by order id ${this.orderId}`;
+          // alert("Order id does not  found in our record");
         }
       },
       error: error=>{
-        console.warn(error.message);
+        this.message = `No food item(s) were found by order id ${this.orderId}`;
       }
     })
+    setTimeout(()=>{
+      this.message = "";
+    },4000)
   }
   closeOrder(){
     this.orderData = null;

@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   adminId!:number;
   sameEmail:string = "false";
   teamEmail:string = "";
+  disabledBtn:boolean = true;
   constructor(private api:ApiService) { }
 
   getTeam(){
@@ -77,6 +78,7 @@ export class ProfileComponent implements OnInit {
 
   message:string = "";
   updateProfile(){
+    this.disabledBtn = false;
     const formData  = new FormData();
     var adminId = this.profileForm.value.id.replace( /(^.+)(\w\d+\w)(.+$)/i,'$2');
     if(this.profileForm.value.email==localStorage.getItem("sessionEmail")){
@@ -93,8 +95,9 @@ export class ProfileComponent implements OnInit {
       formData.append("sentPicture", this.sentPicutre);
       this.api.updateProfile(formData).subscribe({
         next:data=>{
-          console.warn(this.pictureFile);
-          console.warn(data);
+          // console.warn(this.pictureFile);
+          // console.warn(data);
+          this.disabledBtn = true;
           if(data.status ==2){
             alert("Password is wrong");
           }else if(data.status==1){
@@ -118,9 +121,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTeam();
-    // localStorage.removeItem("sessionEmail");
-    // localStorage.setItem("sessionEmail","sajid11@gmail.com");
-    // localStorage.removeItem("isLogged");
   }
 
 }

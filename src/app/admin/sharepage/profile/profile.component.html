@@ -1,14 +1,12 @@
-<section class="profile -my-2">
-    <div class="wrapper">
+<hr>
+<section class="profile my-2">
         <form  [formGroup]="profileForm" (ngSubmit)="updateProfile()">
-            <div id="wizard">
-                <section>
                     <div class="form-header">
                         <div class="avartar">
                             <a href="#">
-                                <img  *ngIf="!picture else selectedImage " src="{{profileImage}}"  class="w-75 h-75 rounded img-thumbnail" alt="profile">
+                                <img  *ngIf="!picture else selectedImage " src="{{profileImage}}"  class="w-50 h-50 rounded img-thumbnail" alt="profile">
                                 <ng-template #selectedImage>
-                                    <img  src="{{picturalUrl}}"  class="w-75 h-75 img-thumbnail rounded" alt="profile">
+                                    <img  src="{{picturalUrl}}"  class="w-50 h-50 img-thumbnail rounded" alt="profile">
                                 </ng-template>
                             </a>
                             <div class="avartar-picker">
@@ -46,8 +44,5 @@
                     <div class="text-center">
                         <button type="submit" [disabled]="profileForm.invalid && disabledBtn" class="btn btn-outline-primary">Update Details</button>
                     </div>
-                </section>
-            </div>
         </form>
-    </div>
 </section>

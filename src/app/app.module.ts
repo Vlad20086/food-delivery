@@ -18,6 +18,7 @@ import { TrackOrderComponent } from './pages/track-order/track-order.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ModelComponent } from './sharepage/model/model.component';
 import { FrontendService } from './services/frontend.service';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import { FrontendService } from './services/frontend.service';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [FrontendService],
+  providers: [FrontendService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

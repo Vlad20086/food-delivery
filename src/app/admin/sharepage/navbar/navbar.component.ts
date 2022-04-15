@@ -10,6 +10,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(private login:LoginService) { }
 
+  hideNav:boolean = true;
   ngOnInit(): void {
   }
   logout(){

@@ -27,7 +27,7 @@
                         ". $this->db_table ."
                     SET
                         email = :email,  
-                        name = :email,  
+                        name = :name,  
                         password = :password";
         
             $stmt = $this->conn->prepare($sqlQuery);

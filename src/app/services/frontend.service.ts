@@ -45,7 +45,6 @@ export class FrontendService {
             this.foodItems.splice(this.foodItems.indexOf(item), 1);
             this.totalPrice = 0;
             this.subTotal();
-            break;
         }
         return this.foodItems;
       }

@@ -15,6 +15,7 @@
     include_once '../class/customers.php';
     include_once '../class/foods.php';
     include_once '../class/feedbacks.php';
+    include_once '../class/webcontents.php';
     
     $database = new Database();
     $db = $database->getConnection();
@@ -126,6 +127,107 @@
         } else{
             echo json_encode(array("message"=>"Order Status could not update", "status"=>0));
         }
+    }else if(isset($_GET['webcontent'])){
+        $item = new WebContent($db);
+        $data = $item->getSingleWebContent();
+        $item->website_name = $_POST['website_name'];
+        $item->home_heading = $_POST['home_heading'];
+        $item->home_center_button = $_POST['home_center_button'];
+       
+        $item->navbar_home = $_POST['navbar_home'];
+        $item->navbar_status = $_POST['navbar_status'];
+        $item->navbar_menu = $_POST['navbar_menu'];
+        $item->navbar_about = $_POST['navbar_about'];
+        $item->navbar_contact = $_POST['navbar_contact'];
+       
+        $item->about_heading = $_POST['about_heading'];
+        $item->about_description = $_POST['about_description'];
+        $item->facebook_link = $_POST['link_facebook'];
+        $item->youtube_link = $_POST['link_youtube'];
+        $item->whatsapp_link = $_POST['link_whatsapp'];
+        $item->email_link = $_POST['link_email'];
+        // $item->home_heading_theme1 = isset($_POST['home_heading_theme1']);
+        // $item->home_heading_theme2 = isset($_POST['home_heading_theme2']);
+        // $item->home_heading_theme3 = isset($_POST['home_heading_theme3']);
+        if ($_POST['theme1']=="true") {
+            $upload_path = __DIR__."/images/web-content/".basename($_FILES["home_heading_theme1"]['name']);
+            $valid_ext = array('png','jpeg','jpg','gif');
+            $ext = strtolower(pathinfo($_FILES['home_heading_theme1']['name'], PATHINFO_EXTENSION));
+            if(in_array($ext,$valid_ext)){  
+                if(file_exists($upload_path)){
+                    $filename = basename($_FILES['home_heading_theme1']['name'],".".$ext).rand().".".$ext;
+                    $upload_path = __DIR__."/images/web-content/".$filename;
+                    $url = "https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/images/web-content/".$filename;
+                    // echo json_encode(array("Error"=>"path exits"));   
+                }else {
+                    $url = "https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/images/web-content/".basename($_FILES["home_heading_theme1"]['name']);
+                    // echo json_encode(array("Error"=>"path does not exits"));   
+                }
+                if($_FILES['home_heading_theme1']['size']/1024 > 100 ){
+                    $database->compressedImage($_FILES['home_heading_theme1']['tmp_name'],$upload_path,40);   
+                }else if($_FILES['home_heading_theme1']['size']/1024 < 100 ) {
+                    $database->compressedImage($_FILES['home_heading_theme1']['tmp_name'],$upload_path,60);   
+                }
+                    $item->home_heading_theme1 = $url;
+            }else {
+                echo json_encode(array("message"=>"File formate is not correct ", "status"=>0));
+            }
+        }
+        if ($_POST['theme3']=="true") {
+            $upload_path3 = __DIR__."/images/web-content/".basename($_FILES["home_heading_theme3"]['name']);
+            $valid_ext3 = array('png','jpeg','jpg','gif');
+            $ext3 = strtolower(pathinfo($_FILES['home_heading_theme3']['name'], PATHINFO_EXTENSION));
+            if(in_array($ext3,$valid_ext3)){  
+                if(file_exists($upload_path)){
+                    $filename3 = basename($_FILES['home_heading_theme3']['name'],".".$ext3).rand().".".$ext3;
+                    $upload_path3 = __DIR__."/images/web-content/".$filename3;
+                    $url3 = "https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/images/web-content/".$filename3;
+                    // echo json_encode(array("Error"=>"path exits"));   
+                }else {
+                    $url3 = "https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/images/web-content/".basename($_FILES["home_heading_theme3"]['name']);
+                    // echo json_encode(array("Error"=>"path does not exits"));   
+                }
+                if($_FILES['home_heading_theme3']['size']/1024 > 100 ){
+                    $database->compressedImage($_FILES['home_heading_theme3']['tmp_name'],$upload_path3,40);   
+                }else if($_FILES['home_heading_theme3']['size']/1024 < 100 ) {
+                    $database->compressedImage($_FILES['home_heading_theme3']['tmp_name'],$upload_path3,60);   
+                }
+                    $item->home_heading_theme3 = $url3;
+            }else {
+                echo json_encode(array("message"=>"File formate is not correct ", "status"=>0));
+            }
+        }
+        if ($_POST['theme2']=="true") {
+            $upload_path2 = __DIR__."/images/web-content/".basename($_FILES["home_heading_theme2"]['name']);
+            $valid_ext2 = array('png','jpeg','jpg','gif');
+            $ext2 = strtolower(pathinfo($_FILES['home_heading_theme2']['name'], PATHINFO_EXTENSION));
+            if(in_array($ext2,$valid_ext2)){  
+                if(file_exists($upload_path)){
+                    $filename2 = basename($_FILES['home_heading_theme2']['name'],".".$ext2).rand().".".$ext2;
+                    $upload_path2 = __DIR__."/images/web-content/".$filename2;
+                    $url2 = "https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/images/web-content/".$filename2;
+                    // echo json_encode(array("Error"=>"path exits"));   
+                }else {
+                    $url2 = "https://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/images/web-content/".basename($_FILES["home_heading_theme2"]['name']);
+                    // echo json_encode(array("Error"=>"path does not exits"));   
+                }
+                if($_FILES['home_heading_theme2']['size']/1024 > 100 ){
+                    $database->compressedImage($_FILES['home_heading_theme2']['tmp_name'],$upload_path2,40);   
+                }else if($_FILES['home_heading_theme2']['size']/1024 < 100 ) {
+                    $database->compressedImage($_FILES['home_heading_theme2']['tmp_name'],$upload_path2,60);   
+                }
+                    $item->home_heading_theme2 = $url2;
+            }else {
+                echo json_encode(array("message"=>"File formate is not correct ", "status"=>0));
+            }
+        }
+        // echo json_encode(array("message"=>"Web Content has been updated", "status"=>$));
+        if($item->updateWebContent()){
+            echo json_encode(array("message"=>"Web Content has been updated", "status"=>1));
+        }else {
+            echo json_encode(array("message"=>"Web Content could not updated", "status"=>0));
+        }
+        
     }else{
         echo json_encode(array("message"=>"No requested method sent by client", "status"=>0));
     }

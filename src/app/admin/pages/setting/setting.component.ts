@@ -8,8 +8,19 @@ import { LoginService } from '../../login.service';
 })
 export class SettingComponent implements OnInit {
 
+  hideProfile:boolean = true;
+  hideWebContent:boolean = false;
   constructor(public loginService:LoginService) { }
 
+
+  webContent(){
+    this.hideProfile = false;
+    this.hideWebContent = true;
+  }
+  profile(){
+    this.hideProfile = true;
+    this.hideWebContent = false;
+  }
   ngOnInit(): void {
   }
 

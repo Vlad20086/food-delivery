@@ -19,10 +19,12 @@
   <div class="home-content">
     <div class="sales-boxes">
       <div class="recent-sales box">
-        <h2 class="text-center"> <u>Profile Section</u> </h2>
-        <!--  Profile -->
-    <app-profile></app-profile>
-        <!--  Profile -->
+        <div class="d-md-flex justify-content-around">
+          <button class="btn p-2 mb-1 mx-1"  [ngClass]="[hideProfile ? 'btn-info' : 'btn-outline-info']" (click)="profile()">Profile Update</button>
+          <button class="btn p-2 mb-1" [ngClass]="[!hideProfile ? 'btn-warning' : 'btn-outline-warning']" (click)="webContent()">Web CMS</button> 
+        </div>
+        <app-webcontent *ngIf="hideWebContent"></app-webcontent>
+        <app-profile *ngIf="hideProfile"></app-profile>
       </div>
     </div>
   </div>

@@ -74,22 +74,25 @@
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Name</label>
                 <input formControlName="name" type="text" class="form-control p-1" id="exampleInputEmail1" aria-describedby="emailHelp" required>
-                <span class="invaild-feedback text-danger" *ngIf="name && name.invalid && name.touched" >Please enter valid input</span>            
+                <span class="invaild-feedback text-danger" *ngIf="name && name.invalid && name.touched" >Please enter valid name <br> </span>            
+                <span class="invaild-feedback text-danger" *ngIf="name && name.errors?.minLength" >Name is to short</span>            
               </div>
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Email</label>
                 <input formControlName="email" type="email" class="form-control p-1" id="exampleInputPassword1">
-                <span class="invaild-feedback text-danger" *ngIf="email && email.invalid && email.touched" >Please enter valid input</span>            
+                <span class="invaild-feedback text-danger" *ngIf="email?.invalid && email?.touched" >Please enter valid email <br> </span>            
               </div>
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
                 <input formControlName="password" type="text" class="form-control p-1" id="exampleInputPassword1">
-                <span class="invaild-feedback text-danger" *ngIf="password && password.invalid && password.touched" >Please enter valid input</span>            
+                <span class="invaild-feedback text-danger" *ngIf="password && password.invalid && password.touched" >Please enter valid password <br> </span>            
+                <span class="invaild-feedback text-danger" *ngIf="password && password.errors?.minLength" >Password is to short</span>  
               </div>
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
                 <input formControlName="cpassword" type="text" class="form-control p-1" id="exampleInputPassword1">
-                <span class="invaild-feedback text-danger" *ngIf="cpassword && cpassword.invalid && cpassword.touched" >Please enter valid input</span>            
+                <span class="invaild-feedback text-danger" *ngIf="cpassword && cpassword.invalid && cpassword.touched" >Please enter valid password <br></span>            
+                <span class="invaild-feedback text-danger" *ngIf="cpassword && cpassword.errors?.minLength" >Password is to short</span>  
               </div>
               <button type="submit" [disabled]="addTeamForm.invalid" class="btn btn-primary px-2 py-1">Add Member</button>
             </form>

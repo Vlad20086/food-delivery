@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
+import { FrontendService } from 'src/app/services/frontend.service';
+import { LoginService } from '../../login.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,11 +16,12 @@ export class ProfileComponent implements OnInit {
   picturalUrl:any;
   sentPicutre:string = "false";
   profileImage:any
+  
   adminId!:number;
   sameEmail:string = "false";
   teamEmail:string = "";
   disabledBtn:boolean = true;
-  constructor(private api:ApiService) { }
+  constructor(private api:ApiService, private login:LoginService) { }
 
   getTeam(){
     this.api.getOneTeam(localStorage.getItem("sessionEmail")).subscribe({
@@ -103,6 +106,7 @@ export class ProfileComponent implements OnInit {
           }else if(data.status==1){
             this.getTeam();
             localStorage.setItem("sessionEmail",this.profileForm.value.email);
+            this.login.getOneTeam();
             alert("Profile Updated");
           }else if(data.status==0){
             alert("server side occured");

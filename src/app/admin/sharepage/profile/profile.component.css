@@ -1,4 +1,4 @@
-  * {
+  .profile {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box; }
@@ -8,9 +8,10 @@
     font-size: 13px;
     color: #808080;
     margin: 0;
+    width:100%;
     font-weight: 400; }
   
-  :focus {
+  :focu {
     outline: none; }
   
   textarea {
@@ -47,25 +48,12 @@
     max-width: 100%;
     vertical-align: middle; }
   
-  /* body {
-    background: url("../images/form-wizard-bg.jpg");
-    background-size: cover; } */
-  
-  .wrapper {
-    max-width: 1400px;
-    margin: auto;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center; }
-  
   .steps .current-info, .wizard > .steps .number {
     display: none; }
   
   #wizard {
     position: relative;
     background: #fff;
-    height: 554px;
     width: 738px;
     padding: 71px 93px 0;
     border-radius: 10px;
@@ -316,16 +304,13 @@
       -webkit-transform: translateX(0);
       transform: translateX(0); } }
   @media (max-width: 767px) {
-    body {
-      background: none; }
-  
-    .wrapper {
-      height: auto;
-      display: block; }
+    .profile {
+      background: none; 
+    }
+
   
     #wizard {
       width: auto;
-      height: auto;
       padding: 30px 20px;
       border-radius: 0;
       box-shadow: none;

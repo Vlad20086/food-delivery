@@ -14,6 +14,8 @@ import { AnalyticsComponent } from './pages/analytics/analytics.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './sharepage/profile/profile.component';
+import { WebcontentComponent } from './sharepage/webcontent/webcontent.component';
+import { LoginService } from './login.service';
 
 
 
@@ -30,11 +32,13 @@ import { ProfileComponent } from './sharepage/profile/profile.component';
     AnalyticsComponent,
     LoginComponent,
     ProfileComponent,
+    WebcontentComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     ReactiveFormsModule
-  ]
+  ],
+  providers: [LoginService],
 })
 export class AdminModule { }

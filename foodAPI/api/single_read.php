@@ -10,6 +10,7 @@
     // include_once '../class/feebacks.php';
     include_once '../class/foods.php';
     include_once '../class/customers.php';
+    include_once '../class/webcontents.php';
     
     $database = new Database();
     $db = $database->getConnection();
@@ -53,6 +54,14 @@
             echo json_encode(array("body"=>$item->getSingleCustomer(), "food"=>$foodItem->getSingleFood($item->id), "message"=>"customer data fetched", "status"=>1));
         }else {
             echo json_encode(array("message"=>"no record found or unable to found", "status"=>0));
+        }
+    }else if(isset($_GET['webcontent'])){
+        $item = new WebContent($db);
+        $row = $item->getSingleWebContent();
+        if($item->getSingleWebContent()){
+            echo json_encode(array("body"=>$row, "message"=>"web-content fetched", "status"=>1));
+        }else {
+            echo json_encode(array("message"=>"Web-content no record found or unable to fetch", "status"=>0));
         }
     }else {
         echo json_encode(array("message"=>"No any request method send by client"));

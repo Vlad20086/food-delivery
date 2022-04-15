@@ -9,8 +9,8 @@ export class ApiService {
 
   constructor(private http:HttpClient, ) { }
   
-  // private url:any = "http://localhost/PHP/Development/foodAPI/api/";  
-  private url:any = "https://failureboy123.000webhostapp.com/foodAPI/api/";
+  private url:any = "http://localhost/PHP/Development/foodAPI/api/";  
+  // private url:any = "https://failureboy123.000webhostapp.com/foodAPI/api/";
     
   // add new data method;
   addFood(data:any){
@@ -50,6 +50,9 @@ export class ApiService {
   // get data method;
   getTeam(){
     return this.http.get<any>(this.url+"read.php?admin=1");
+  }
+  getWebContent(){
+    return this.http.get<any>(this.url+"single_read.php?webcontent=1");
   }
   getFood(){
     return this.http.get<any>(this.url+"read.php?food=1");
@@ -101,6 +104,13 @@ export class ApiService {
       return res;
     }));
   }
+
+  updateWebConent(data:any){
+    return this.http.post<any>(this.url+"update.php?webcontent=1",data).pipe(map((res:any)=>{
+      return res;
+    }));
+  }
+
   orderStatus(id:number, status:number){
     return this.http.get<any>(this.url+"update.php?orderStatus=1&order_id="+id+"&order_status="+status);
   }

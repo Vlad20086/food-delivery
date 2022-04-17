@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   foodId!:number;
   title:string = "Cludkitchenweb";
 
-  constructor(private api:ApiService, private front:FrontendService) { }
+  constructor(private api:ApiService, public front:FrontendService) { }
 
   getFood(){
     this.api.getFoodLimit().subscribe({

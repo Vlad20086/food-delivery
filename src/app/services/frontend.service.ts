@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +8,28 @@ export class FrontendService {
 
   foodItems:any = [];
   totalPrice:number = 0;
-  
-  constructor() {}  
+
+  websitename:any;
+  homeheading:any;
+  homebuttontext:any;
+  aboutheading:any;
+  aboutdescription:any;
+  navbarhome:any;
+  navbarmenu:any;
+  navbartrackorder:any;
+  navbarabout:any;
+  navbarcontact:any;
+  linkfacebook:any;
+  linkyoutube:any;
+  linkwhatsapp:any;
+  linkemail:any;
+  theme1:any;
+  theme2:any;
+  theme3:any;
+
+  constructor(private api:ApiService) {
+    this.webContent();
+  }  
     addToCart(food:any){
       // if(this.foodItems.length !== 0){
       //   // for(let i = 0; this.foodItems.length > 0; i++){
@@ -48,5 +69,33 @@ export class FrontendService {
         }
         return this.foodItems;
       }
+    }
+    webContent(){
+      this.api.getWebContent().subscribe({
+        next:data=>{
+          this.websitename = data.body.website_name,
+          this.homeheading = data.body.home_heading,
+          this.homebuttontext = data.body.home_center_button,
+          this.aboutheading = data.body.about_heading,
+          this.aboutdescription = data.body.about_description,
+  
+          this.navbarhome = data.body.navbar_home,
+          this.navbarmenu = data.body.navbar_menu,
+          this.navbartrackorder = data.body.navbar_status,
+          this.navbarabout = data.body.navbar_about,
+          this.navbarcontact = data.body.navbar_contact,
+  
+          this.linkfacebook = data.body.facebook_link,
+          this.linkyoutube = data.body.youtube_link,
+          this.linkwhatsapp = data.body.whatsapp_link,
+          this.linkemail = data.body.email_link
+          this.theme1 = data.body.home_heading_theme1;
+          this.theme2 = data.body.home_heading_theme2;
+          this.theme3 = data.body.home_heading_theme3;
+        },
+        error:error=>{
+          console.warn(error.message);
+        }
+      })
     }
 }

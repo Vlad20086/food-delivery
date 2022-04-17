@@ -9,8 +9,8 @@ export class ApiService {
 
   constructor(private http:HttpClient, ) { }
   
-  private url:any = "http://localhost/PHP/Development/foodAPI/api/";  
-  // private url:any = "https://failureboy123.000webhostapp.com/foodAPI/api/";
+  // private url:any = "http://localhost/PHP/Development/foodAPI/api/";  
+  private url:any = "https://failureboy123.000webhostapp.com/foodAPI/api/";
     
   // add new data method;
   addFood(data:any){

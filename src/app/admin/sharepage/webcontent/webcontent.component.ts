@@ -10,7 +10,13 @@ import { DatePipe } from '@angular/common';
 })
 export class WebcontentComponent implements OnInit {
 
-  constructor(private api:ApiService, private datePipe:DatePipe) { }
+  constructor(private api:ApiService, private datePipe:DatePipe) { 
+  }
+
+  getShowTheme1:any;
+  getShowTheme2:any;
+  getShowTheme3:any;
+
 
   theme1:boolean = false;
   theme1File:any ="";
@@ -28,7 +34,6 @@ export class WebcontentComponent implements OnInit {
   sentTheme3:string = "false";
 
   imageProcessing1(event:any){
-    this.theme1 = true;
     this.theme1File = event.target.files[0];
     if(event.target.files.length > 0 ){
       this.theme1 = true;
@@ -36,15 +41,15 @@ export class WebcontentComponent implements OnInit {
       this.sentTheme1 = "true";
       reader.onload = () => {
         this.theme1lUrl= reader.result as string;
+        this.getShowTheme1 = this.theme1lUrl;
       }
       reader.readAsDataURL(this.theme1File)
     }else {
-      this.theme1 = false;
+      this.getShowTheme1 = this.getTheme1;
     }
   }
 
   imageProcessing2(event:any){
-    this.theme2 = true;
     this.theme2File = event.target.files[0];
     if(event.target.files.length > 0 ){
       this.theme2 = true;
@@ -52,15 +57,15 @@ export class WebcontentComponent implements OnInit {
       this.sentTheme2 = "true";
       reader.onload = () => {
         this.theme2lUrl= reader.result as string;
+        this.getShowTheme2 = this.theme2lUrl;
       }
       reader.readAsDataURL(this.theme2File)
     }else {
-      this.theme2 = false;
+      this.getShowTheme1 = this.getShowTheme2;
     }
   }
 
   imageProcessing3(event:any){
-    this.theme3 = true;
     this.theme3File = event.target.files[0];
     if(event.target.files.length > 0 ){
       this.theme3 = true;
@@ -68,10 +73,11 @@ export class WebcontentComponent implements OnInit {
       this.sentTheme3 = "true";
       reader.onload = () => {
         this.theme3lUrl= reader.result as string;
+        this.getShowTheme3 = this.theme3lUrl;
       }
       reader.readAsDataURL(this.theme3File)
     }else {
-      this.theme3 = false;
+      this.getShowTheme3 = this.getTheme3;
     }
   }
 
@@ -99,6 +105,7 @@ export class WebcontentComponent implements OnInit {
 
   })
   formmWebContent = new FormData();
+  message:string = "";
   updateConents(){
     // let linkwhatsapp = `https://wa.me/${this.webContentForm.value.linkwhatsapp}`;
     // let linkemail = `mailto:${this.webContentForm.value.linkemail}?subject = ${this.webContentForm.value.websitename}&body = Hello Dear, How can i help You ?`; 
@@ -127,12 +134,20 @@ export class WebcontentComponent implements OnInit {
     this.formmWebContent.append("home_heading_theme3",this.theme3File),
     this.api.updateWebConent(this.formmWebContent).subscribe({
       next:data=>{
-        console.warn(data);
+        if(data.status==1){
+          this.message = "Web Contents has been updated";
+        }else {
+          this.message = "Website contents could not update";
+        }
       },
       error:error=>{
-        console.warn(error.message);
+        this.message = error.message;
       }
     })
+    setTimeout(()=>{
+      this.message  = "";
+    },3000)
+    window.scroll({ top: 0, left: 0, behavior: 'smooth'});
   }
   getTheme1!:any;
   getTheme2!:any;
@@ -143,7 +158,11 @@ export class WebcontentComponent implements OnInit {
         this.getTheme1 = data.body.home_heading_theme1;
         this.getTheme2 = data.body.home_heading_theme2;
         this.getTheme3 = data.body.home_heading_theme3;
-        console.log(data.body);
+
+        this.getShowTheme1 = data.body.home_heading_theme1;
+        this.getShowTheme2 = data.body.home_heading_theme2;
+        this.getShowTheme3 = data.body.home_heading_theme3;
+
         this.webContentForm.patchValue({
           "websitename":data.body.website_name,
           "homeheading":data.body.home_heading,

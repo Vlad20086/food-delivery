@@ -1,6 +1,7 @@
 <hr>
 <div class=" text-center ">
     <h2> - Website contents Managmenet -  </h2>
+    <div class="alert alert-warning" *ngIf="message!==''">{{message}}</div>
 </div>
 <div class="row ">
     <div class="col-lg-8 mx-auto">
@@ -94,29 +95,31 @@
                                 <div class="row mb-2">
                                     <div class="col-md-6 my-1">
                                         <label for="form_name"> 1. Theme <span class="text-danger">*</span></label> 
-                                        <input type="file"  (change)="imageProcessing1($event)" class="form-control" required="required" formControlName="homeheadingtheme1"> 
-                                        <img  *ngIf="!theme1 else selectedTheme1 " src="{{getTheme1}}"  class="img-thumbnail" alt="theme1">
-                                        <ng-template #selectedTheme1>
+                                        <input type="file"  (change)="imageProcessing1($event)" class="form-control" required="required"> 
+                                        <img  src="{{getShowTheme1}}"  class="img-thumbnail" alt="theme1">
+                                        <!-- <ng-template #selectedTheme1>
                                             <img  src="{{theme1lUrl}}"  class="img-thumbnail rounded" alt="theme2">
-                                        </ng-template>
+                                        </ng-template> -->
                                     </div>
                                     <div class="col-md-6 my-1">
                                         <label for="form_name">2. Theme <span class="text-danger">*</span></label> 
-                                        <input type="file"  (change)="imageProcessing2($event)" class="form-control" required="required" formControlName="homeheadingtheme2"> 
-                                        <img  *ngIf="!theme2 else selectedTheme2 " src="{{getTheme2}}"  class="img-thumbnail" alt="theme2">
-                                        <ng-template #selectedTheme2>
+                                        <input type="file"  (change)="imageProcessing2($event)" class="form-control" required="required"> 
+                                        <img  src="{{getShowTheme2}}"  class="img-thumbnail" alt="theme1">
+                                        <!-- <img  *ngIf="!theme2 else selectedTheme2 " src="{{getTheme2}}"  class="img-thumbnail" alt="theme2"> -->
+                                        <!-- <ng-template #selectedTheme2>
                                             <img  src="{{theme2lUrl}}"  class="img-thumbnail rounded" alt="theme2">
-                                        </ng-template>
+                                        </ng-template> -->
                                     </div>
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-md-6 my-1">
                                         <label for="form_name"> 3. Theme <span class="text-danger">*</span></label> 
-                                        <input type="file"  (change)="imageProcessing3($event)" class="form-control" required="required" formControlName="homeheadingtheme3"> 
-                                        <img  *ngIf="!theme3 else selectedTheme3 " src="{{getTheme3}}"  class="img-thumbnail" alt="theme3">
+                                        <input type="file"  (change)="imageProcessing3($event)" class="form-control" required="required"> 
+                                        <img  src="{{getShowTheme3}}"  class="img-thumbnail" alt="theme3">
+                                        <!-- <img  *ngIf="!theme3 else selectedTheme3 " src="{{getTheme3}}"  class="img-thumbnail" alt="theme3">
                                         <ng-template #selectedTheme3>
                                             <img  src="{{theme3lUrl}}"  class="img-thumbnail rounded" alt="theme3">
-                                        </ng-template>
+                                        </ng-template> -->
                                     </div>
                                     <div class="col-md-6 my-1">
                                         <!-- <label for="form_name">2. Home heading <span class="text-danger">*</span></label> 

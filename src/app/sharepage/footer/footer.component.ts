@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FrontendService } from 'src/app/services/frontend.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(public fornt:FrontendService) { }
   today:Date  = new Date();
   ngOnInit(): void {
   }

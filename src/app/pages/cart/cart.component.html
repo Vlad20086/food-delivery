@@ -1,11 +1,11 @@
 <app-navbar></app-navbar>
 <div class="body m-2 d-flex justify-content-center align-items-center p-4">
-    <div class="CartContainer p-4 w-100" *ngIf="foodCartItems.length > 0  else noCartItems">
+    <div class="CartContainer p-4 w-100" *ngIf="this.front.cartLength > 0  else noCartItems">
            <div class="Header">
                <h3 class="Heading">Shopping Cart</h3>
                <h5 class="Action" (click)="this.front.clearFoodItems()">Remove all</h5>
            </div>
-           <div *ngFor="let item of foodCartItems; let i = index">
+           <div *ngFor="let item of this.front.getFoodItems(); let i = index">
             <h5 class="text-secondary mt-4 mb-2 ">Product {{i+1}} <button class="btn-sm btn-danger" (click)="front.removeOneFood(item.food_id)">X</button></h5>
             <div class="d-md-flex justify-content-between items-center Cart-Items border p-4 h-auto m-1">
                     <div class="image-box my-2">
@@ -34,7 +34,7 @@
             <div class="total">
                 <div>
                     <div class="Subtotal">Total Prices: </div>
-                    <div class="items"> <strong> Total Items : {{foodCartItems.length}}</strong></div>
+                    <div class="items"> <strong> Total Items : {{this.front.cartLength}}</strong></div>
                 </div>
                 <div class="total-amount"> {{this.front.totalPrice| currency:"INR"}}</div>
             </div>

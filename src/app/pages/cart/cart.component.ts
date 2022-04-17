@@ -9,16 +9,10 @@ import { FrontendService } from 'src/app/services/frontend.service';
 export class CartComponent implements OnInit {
 
   constructor(public front:FrontendService) { }
-  foodCartItems:any = [];
   foodPrice:number = 0;
-
-  totalItems:number = this.foodCartItems.length; 
 
   showForm:boolean = false;
 
-  foodCart(){
-    this.foodCartItems = this.front.getFoodItems();
-  }
   openUserForm(){
     this.showForm = true;
   }
@@ -27,7 +21,7 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.foodCart(); 
+    this.front.getFoodItems();
   }
 
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+
 import { ApiService } from './api.service';
 
 @Injectable({
@@ -8,6 +9,8 @@ export class FrontendService {
 
   foodItems:any = [];
   totalPrice:number = 0;
+
+  cartLength:number = 0;
 
   websitename:any;
   homeheading:any;
@@ -31,43 +34,51 @@ export class FrontendService {
     this.webContent();
   }  
     addToCart(food:any){
-      // if(this.foodItems.length !== 0){
-      //   // for(let i = 0; this.foodItems.length > 0; i++){
-      //     if (this.foodItems.indexOf(food) === -1) {
-      //       this.foodItems.push(food);
-      //     }else {
-      //       alert("already added to cart"); 
-      //     }
-      //   // }
-      // }else {
-      //   this.foodItems.push(food);
-      // }
         this.foodItems.push(food);
+        sessionStorage.setItem("cartItems", JSON.stringify(this.foodItems));
     }
     getFoodItems(){
-      this.subTotal();
-      return this.foodItems;
+      if(sessionStorage.getItem("cartItems")){
+        this.subTotal();
+        let cartItems:any = sessionStorage.getItem("cartItems");
+        this.cartLength  = JSON.parse(cartItems).length;
+        return JSON.parse(cartItems); 
+      }
     }
     clearFoodItems(){
-      this.totalPrice  = 0;
       this.subTotal();
-      this.foodItems.splice(0,this.foodItems.length)
-      return this.foodItems;
+      sessionStorage.removeItem("cartItems");
+      this.foodItems = []
+      this.cartLength  = 0;
     }
 
     subTotal(){
-      for(let i = 0; i < this.foodItems.length; i++){
-         this.totalPrice += parseInt(this.foodItems[i].price);
+      this.totalPrice = 0;
+      if(sessionStorage.getItem("cartItems")){
+          let cartItem1:any = sessionStorage.getItem("cartItems");
+          let cartItem = JSON.parse(cartItem1);
+          for(let i = 0; i < cartItem.length; i++){
+            this.totalPrice += parseInt(cartItem[i].price);
+          }
       }
     }
     removeOneFood(id:number){
-      for (let item of this.foodItems) {
-        if (id === item.food_id) {
-            this.foodItems.splice(this.foodItems.indexOf(item), 1);
-            this.totalPrice = 0;
-            this.subTotal();
+      if(sessionStorage.getItem("cartItems")){
+        let cartItem1:any = sessionStorage.getItem("cartItems");
+        this.foodItems = JSON.parse(cartItem1); 
+
+        for (let item of this.foodItems) {
+          if (id === item.food_id) {
+              this.foodItems.splice(this.foodItems.indexOf(item), 1);
+              sessionStorage.setItem("cartItems", JSON.stringify(this.foodItems));
+              let cartItem1:any = sessionStorage.getItem("cartItems");
+              let cartItem = JSON.parse(cartItem1);
+              this.cartLength = cartItem.length;
+              this.subTotal();
+          }
         }
-        return this.foodItems;
+      }else {
+        console.warn("no data");
       }
     }
     webContent(){

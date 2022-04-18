@@ -31,7 +31,7 @@ export class ModelComponent implements OnInit {
     this.addCart.emit();
   }
   orderForm = new FormGroup({
-    "name": new FormControl("", [Validators.required,Validators.minLength(3),Validators.pattern('^[A-Za-z]+$')]  ),
+    "name": new FormControl("", [Validators.required,Validators.minLength(3)]  ),
     "address": new FormControl("", [Validators.required, Validators.minLength(20)]),
     "number": new FormControl("", [Validators.required, Validators.minLength(10),Validators.maxLength(10), Validators.pattern('^[0-9]*$')]),
   })
@@ -53,17 +53,17 @@ export class ModelComponent implements OnInit {
   placeOrder(){
     const formData  = new FormData();
     let order_id = Math.floor(Math.random()*999999-999+1)+999;
-    for(let i = 0; this.front.foodItems.length > i; i++){
-        console.warn(this.front.foodItems);
+    for(let i = 0; this.front.cartLength >= i; i++){
         formData.append("name", this.orderForm.value.name);
         formData.append("address", this.orderForm.value.address);
         formData.append("number", this.orderForm.value.number);
-        formData.append("food_id",this.front.foodItems[i].food_id);
+        formData.append("food_id",this.front.getFoodItems()[i].food_id);
         formData.append("order_id",order_id.toString());
         this.api.addOrder(formData).subscribe({
           next:data=>{
             // if(this.front.getFoodItems().length < i-1){
-              this.message = "Your order has been Recieved, We'll soon contact you :)"
+              this.front.removeOneFood(this.front.getFoodItems()[i].food_id);
+              this.message = "Your order has been Recieved, We'll soon contact you :)";
               setTimeout(()=>{
                 this.message = "";
                 this.orderForm.reset();

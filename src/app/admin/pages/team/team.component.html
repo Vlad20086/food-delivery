@@ -44,7 +44,7 @@
                   <td>{{data.email}}</td>
                   <!-- <td>{{data.password}} </td> -->
                   <td>*******</td>
-                  <td>{{data.timestamp | date:"mm/dd/yy"}}</td>
+                  <td>{{data.timestamp | date:"short"}}</td>
                   <th scope="row">
                     <button class="btn btn-success mx-1" (click)="editMember(data.id)"><i class="bx bx-pencil"></i></button>
                     <button class="btn btn-danger" (click)="deleteMember(data.id)"><i class="bx bx-trash"></i></button>

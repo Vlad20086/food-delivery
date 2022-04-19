@@ -62,7 +62,7 @@
             <ul class="details">
               <li class="topic">Date</li>
               <span *ngFor="let item of salesData">
-                <li><a href="#"> {{item.order_date | date:"dd/mm/yyyy"}}</a></li>
+                <li><a href="#"> {{item.order_date | date:"short"}}</a></li>
               </span>
               <strong>Total :- </strong>  
             </ul>

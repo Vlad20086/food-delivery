@@ -1,0 +1,83 @@
+<app-navbar></app-navbar>
+<div class="banner">
+    <!-- <img src="assets/img/bannerimg.jpg" class="bgimg" alt=""> -->
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{front.theme1}}" class="bgimg" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{{front.theme2}}" class="bgimg" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{{front.theme3}}" class="bgimg" alt="...">
+          </div>
+        </div>
+        <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button> -->
+      </div>
+    <div class="content">
+        <h1 class="mb-5 rounded">Fresh Cooked Food <br/> At Your Door.</h1>
+        <a routerLink="menu"> {{front.homebuttontext}} <i class="bi bi-arrow-right"></i></a>
+    </div>
+</div>
+<!-- step  -->
+<div class="container mt-5 mb-5">
+    <h1 class="text-center">How to get <span class="highlight">fresh food</span></h1>
+    <div class="row mt-5">
+        <!-- one  -->
+        <div class="col-lg-4 mt-2">
+            <div class="stepBox">
+                <h1>1</h1>
+                <p>select food</p>
+            </div>
+        </div>
+<!-- two -->
+        <div class="col-lg-4 mt-2">
+            <div class="stepBox">
+                <h1>2</h1>
+                <p>fill the details</p>
+            </div>
+        </div>
+        <!-- three  -->
+        <div class="col-lg-4 mt-2">
+            <div class="stepBox">
+                <h1>3</h1>
+                <p>your order delivered in minute</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- foodbox  -->
+<div class="container mt-4 mb-4">
+    <h1 class="text-center">Customers <span class="highlight">Favourites Food</span></h1>
+    <div class="row">
+        <div class="col-lg-3 mt-3" *ngFor="let fd of foodData">
+            <div class="foodbox">
+                <img src="{{fd.picture}}" />
+                <h1>{{fd.name}}</h1>
+                <p>{{fd.price | currency:'INR'}}</p>
+                <a class="btn btn-success" [routerLink]="['/menu',fd.food_id]">Buy Now &nbsp;<i class="bi bi-bag"></i></a>
+                <button class="btn btn-warning  mx-1" (click)="askAddCart(fd)">Add to Cart</button>
+                <!-- <ng-template #noCartAdded>
+                    <button class="btn btn-warning  mx-1">Added</button>
+                </ng-template> -->
+            </div>
+        </div>
+        <button  routerLink="menu" class="btn btn-outline-primary mt-4 "> View More...</button>
+    </div>
+</div>
+<app-model *ngIf="hide" (cancel)="closeModel()" [headingMsg]="headingMsg" (addCart)="addCart()"></app-model>
+<app-footer></app-footer>

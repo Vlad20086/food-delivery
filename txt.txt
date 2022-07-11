@@ -1,0 +1,22 @@
+ORDER STATUS : 
+4. Order Placed 
+3. Order Cancelled 
+2. Order Confirmed 
+1.   
+0. Delivered
+
+CART ITEMS CHECKOUT ORDER FOOD CUSTOMERS TABLE SYSTEM
+1. order_track_id = random number check before insert  
+2. last inserted order_track_id get and insert there
+3. before add last order_track_id check is exits or not.
+
+=> single order
+    1. order_track_id = food_id
+
+=> multi order system through cart 
+    1. order_track_id + = last_food_id;
+
+=> add new column in the name testy_food table
+    1. order_track_id;
+=> 
+

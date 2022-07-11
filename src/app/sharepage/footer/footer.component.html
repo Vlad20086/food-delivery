@@ -1,0 +1,24 @@
+<div class="container-fluid footer mt-5 text-danger">
+    <div class="row">
+        <!-- name  -->
+        <div class="col-lg-4 mt-3 mb-3">
+            <h1> <span class="lobsterFont"> {{fornt.websitename}}</span> <a class="text-danger" routerLink="/login">[<abbr title="restricated area" class="initialism">Author Login</abbr>]</a> </h1>
+            <p>GOOD FOOD, GOOD EAT</p>
+        </div>
+        <!-- nav  -->
+        <div class="col-lg-4 mt-lg-3 mb-3 text-center">
+            <a routerLink="/"  routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:true}">{{fornt.navbarhome}} </a>
+            <a routerLink="/menu" routerLinkActive="active-link">{{fornt.navbarmenu}}</a>
+            <a routerLink="/about" routerLinkActive="active-link">{{fornt.navbarabout}}</a>
+            <a routerLink="/contact" routerLinkActive="active-link">{{fornt.navbarcontact}}</a>
+        </div>
+        <!-- socialmedia -->
+        <div class="col-lg-4 mt-3 mb-3 text-center">
+            <a href="{{fornt.linkfacebook}}" target="_blank"><i class="bi bi-facebook text-primary"></i></a>
+            <a href="mailto:{{fornt.linkemail}}?subject = {{fornt.websitename}}&body = Hello Dear, How can i help You ?" target="_blank"><i class="bi bi-envelope text-warning"></i></a>
+            <a href="{{fornt.linkyoutube}}" target="_blank"><i class="bi bi-youtube text-danger"></i></a>
+            <a href="{https://wa.me/${front.linkwhatsapp}}" target="_blank"><i class="bi bi-whatsapp text-success"></i></a>
+        </div>
+        <h6 class="text-center text-light leading"> <strong> <abbr title="" class="initialism">   Copyright &#169;{{today | date:"Y"}} All rights & reserved </abbr></strong>  </h6>
+    </div>
+</div>

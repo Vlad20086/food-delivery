@@ -1,0 +1,139 @@
+<hr>
+<div class=" text-center ">
+    <h2> - Website contents Managmenet -  </h2>
+    <div class="alert alert-warning" *ngIf="message!==''">{{message}}</div>
+</div>
+<div class="row ">
+    <div class="col-lg-8 mx-auto">
+        <div class="card mt-2 mx-auto md:p-4 bg-light">
+            <div class="card-body bg-light">
+                <div class="md:container">
+                    <form role="form" [formGroup]="webContentForm" (ngSubmit)="updateConents()">
+                        <div class="controls">
+                            <div class="mb-4">
+                                <label for="form_name" class="mb-2"> Last Updated Date <span class="text-danger">*</span> </label> 
+                                <input type="date" class="form-control w-md-50" required="required" formControlName="lastupdatedate" readonly> 
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 my-1">
+                                    <label for="form_name">Website Name <span class="text-danger">*</span></label> 
+                                    <input type="text"  class="form-control" required="required" formControlName="websitename"> 
+                                </div>
+                                <div class="col-md-6 my-1">
+                                    <label for="form_name">Home heading <span class="text-danger">*</span></label> 
+                                    <input type="text"  class="form-control" required="required" formControlName="homeheading"> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 my-1">
+                                    <label>Home Button Text <span class="text-danger">*</span></label> 
+                                    <input type="text"  class="form-control" required="required" formControlName="homebuttontext"> 
+                                </div>
+                                <div class="col-md-6 my-1">
+                                    <label for="form_name"> About Heading </label> 
+                                    <input type="text"  class="form-control" required="required" formControlName="aboutheading"> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 my-1">
+                                    <div class="form-group"> 
+                                        <label for="form_message">About Description <span class="text-danger">*</span></label>
+                                         <textarea class="form-control" rows="4" required="required" formControlName="aboutdescription"></textarea>
+                                    </div>
+                                </div>
+                                <h4 class="text-center mt-4"> Navbar Header Text</h4>
+                                <div class="row">
+                                    <div class="col-md-4 mb-1">
+                                        <label> Home <span class="text-danger"><span class="text-danger">*</span></span> </label> 
+                                        <input type="text"  class="form-control" required="required" formControlName="navbarhome"> 
+                                    </div>
+                                    <div class="col-md-4 mb-1">
+                                        <label for="form_name">  Menu <span class="text-danger">*</span> </label> 
+                                        <input type="text"  class="form-control" required="required" formControlName="navbarmenu"> 
+                                    </div>
+                                    <div class="col-md-4 mb-1">
+                                        <label for="form_name"> Track Order <span class="text-danger">*</span> </label> 
+                                        <input type="text"  class="form-control" required="required" formControlName="navbartrackorder"> 
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-1">
+                                        <label> About <span class="text-danger"><span class="text-danger">*</span></span> </label> 
+                                        <input type="text"  class="form-control" required="required" formControlName="navbarabout"> 
+                                    </div>
+                                    <div class="col-md-4 mb-1">
+                                        <label for="form_name">  Contact <span class="text-danger">*</span> </label> 
+                                        <input type="text"  class="form-control" required="required" formControlName="navbarcontact"> 
+                                    </div>
+                                    <div class="col-md-4 mb-1">
+                                        <!-- <label for="form_name"> Track Order <span class="text-danger">*</span> </label> 
+                                        <input type="text"  class="form-control" required="required" formControlName="navbartrackorder">  -->
+                                    </div>
+                                </div>
+                                <h4 class="text-center mt-4"> Social Network Links</h4>
+                                <div class="row">
+                                    <div class="col-md-6 mb-1">
+                                        <label> Facebook <span class="text-danger"><span class="text-danger">*</span></span> </label> 
+                                        <input type="text"  class="form-control" required="required" formControlName="linkfacebook"> 
+                                    </div>
+                                    <div class="col-md-6 mb-1">
+                                        <label for="form_name">  Youtube <span class="text-danger">*</span> </label> 
+                                        <input type="text"  class="form-control" required="required" formControlName="linkyoutube"> 
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-1">
+                                        <label> Email <span class="text-danger"><span class="text-danger">*</span></span> </label> 
+                                        <input type="text"  class="form-control" required="required" formControlName="linkemail"> 
+                                    </div>
+                                    <div class="col-md-6 mb-1">
+                                        <label for="form_name"> Whatsapp <span class="text-danger">*</span> </label> 
+                                        <input type="text"  class="form-control" required="required" formControlName="linkwhatsapp"> 
+                                    </div>
+                                </div>
+                                <h4 class="text-center mt-4">Home Header Theme</h4>
+                                <div class="row mb-2">
+                                    <div class="col-md-6 my-1">
+                                        <label for="form_name"> 1. Theme <span class="text-danger">*</span></label> 
+                                        <input type="file"  (change)="imageProcessing1($event)" class="form-control" required="required"> 
+                                        <img  src="{{getShowTheme1}}"  class="img-thumbnail" alt="theme1">
+                                        <!-- <ng-template #selectedTheme1>
+                                            <img  src="{{theme1lUrl}}"  class="img-thumbnail rounded" alt="theme2">
+                                        </ng-template> -->
+                                    </div>
+                                    <div class="col-md-6 my-1">
+                                        <label for="form_name">2. Theme <span class="text-danger">*</span></label> 
+                                        <input type="file"  (change)="imageProcessing2($event)" class="form-control" required="required"> 
+                                        <img  src="{{getShowTheme2}}"  class="img-thumbnail" alt="theme1">
+                                        <!-- <img  *ngIf="!theme2 else selectedTheme2 " src="{{getTheme2}}"  class="img-thumbnail" alt="theme2"> -->
+                                        <!-- <ng-template #selectedTheme2>
+                                            <img  src="{{theme2lUrl}}"  class="img-thumbnail rounded" alt="theme2">
+                                        </ng-template> -->
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-md-6 my-1">
+                                        <label for="form_name"> 3. Theme <span class="text-danger">*</span></label> 
+                                        <input type="file"  (change)="imageProcessing3($event)" class="form-control" required="required"> 
+                                        <img  src="{{getShowTheme3}}"  class="img-thumbnail" alt="theme3">
+                                        <!-- <img  *ngIf="!theme3 else selectedTheme3 " src="{{getTheme3}}"  class="img-thumbnail" alt="theme3">
+                                        <ng-template #selectedTheme3>
+                                            <img  src="{{theme3lUrl}}"  class="img-thumbnail rounded" alt="theme3">
+                                        </ng-template> -->
+                                    </div>
+                                    <div class="col-md-6 my-1">
+                                        <!-- <label for="form_name">2. Home heading <span class="text-danger">*</span></label> 
+                                        <input type="file"  class="form-control" required="required" formControlName="homeheading">  -->
+                                    </div>
+                                </div>
+                                <div class="col-md-12 my-1 text-center"> 
+                                    <input type="submit" [disabled]="!webContentForm.valid" class="btn btn-success btn-send pt-2 btn-block" value="UPDATE">
+                                 </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> <!-- /.8 -->
+    </div> <!-- /.row-->
+</div>
